@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+/* -----------------------------------------------------------------------------
+ * Design tokens — dark navy cybersecurity theme.
+ * These become Tailwind utilities automatically (e.g. bg-surface, text-accent).
+ * ---------------------------------------------------------------------------*/
+@theme {
+  --color-background: #060b16; /* page background: deep navy-black */
+  --color-surface: #0b1322; /* cards */
+  --color-panel: #0f1a2e; /* nested panels / chips */
+  --color-edge: #1d2c46; /* borders */
+  --color-ink: #e7eef8; /* primary text */
+  --color-muted: #94a7c2; /* secondary text */
+  --color-accent: #38bdf8; /* cyan-blue accent */
+  --color-accent-alt: #34d399; /* subtle green accent */
+}
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, "SF Mono", monospace;
+}
+
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-accent) 30%, transparent);
+}
+
+/* Keyboard focus visibility (accessibility) */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Skip link — hidden until focused via keyboard */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  border-radius: 8px;
+  background: var(--color-accent);
+  color: var(--color-background);
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+}
+
+/* Subtle blueprint grid used behind the hero */
+.bg-grid {
+  background-image: linear-gradient(to right, rgba(56, 189, 248, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 35%, transparent 100%);
+}
+
+/* Soft radial glows behind the hero headline */
+.hero-glow {
+  background: radial-gradient(600px circle at 25% 25%, rgba(56, 189, 248, 0.13), transparent 60%),
+    radial-gradient(500px circle at 80% 10%, rgba(52, 211, 153, 0.07), transparent 60%);
+}
+
+/* Buttons */
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition;
+  }
+  .btn-primary {
+    @apply bg-accent text-background hover:bg-accent/85;
+  }
+  .btn-secondary {
+    @apply border border-accent/50 text-accent hover:bg-accent/10;
+  }
+  .btn-ghost {
+    @apply border border-edge text-muted hover:border-muted hover:text-ink;
+  }
+}
+
+/* Scroll-reveal animation (driven by components/Reveal.tsx).
+   The hidden state only applies when JS is running (html.js is set in
+   layout.tsx), so content is never invisible for no-JS visitors or crawlers. */
+.reveal {
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+html.js .reveal:not(.reveal-visible) {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  html.js .reveal:not(.reveal-visible) {
+    opacity: 1;
+    transform: none;
+  }
+  .reveal {
+    transition: none;
+  }
+}

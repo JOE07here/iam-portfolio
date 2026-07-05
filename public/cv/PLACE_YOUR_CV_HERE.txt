@@ -1,0 +1,8 @@
+Put your CV in this folder as:
+
+  Joemon_Johnson_CV.pdf
+
+The "Download CV" button in the hero links to /cv/Joemon_Johnson_CV.pdf.
+If you use a different filename, update `site.cvUrl` in src/data/portfolio.ts.
+
+You can delete this placeholder file afterwards.
