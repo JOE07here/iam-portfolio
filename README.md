@@ -43,26 +43,28 @@ The "Download CV" button in the hero points at that path.
 
 ## How to deploy
 
-### Vercel (recommended — zero config)
+### GitHub Pages (current setup — live)
 
-1. Push this folder to a GitHub repository (`git init`, commit, push).
-2. Go to [vercel.com](https://vercel.com) → **Add New Project** → import the repo.
+The site is deployed at **https://joe07here.github.io/iam-portfolio/**.
+Every push to `main` rebuilds and redeploys automatically via
+[`.github/workflows/deploy.yml`](.github/workflows/deploy.yml). Nothing else to do —
+edit content, commit, push.
+
+The static export is configured in [`next.config.ts`](next.config.ts)
+(`output: "export"` + `basePath: "/iam-portfolio"`).
+
+### Vercel (if you switch later)
+
+1. Remove the `output`, `basePath`, and `images` lines from `next.config.ts`,
+   and drop the `/iam-portfolio` prefix from `site.cvUrl` in `src/data/portfolio.ts`.
+2. Go to [vercel.com](https://vercel.com) → **Add New Project** → import this repo.
 3. Accept the defaults (Vercel auto-detects Next.js) and deploy.
-4. Update `site.url` in `src/data/portfolio.ts` to the deployed URL and redeploy.
+4. Update `site.url` in `src/data/portfolio.ts` to the new URL.
 
-### Netlify
+### Netlify (if you switch later)
 
-1. Push the repo to GitHub.
-2. On [netlify.com](https://netlify.com) → **Add new site** → import the repo.
-3. Build command: `npm run build` — Netlify's Next.js runtime handles the rest.
-
-### GitHub Pages (static export)
-
-1. In [`next.config.ts`](next.config.ts), uncomment the three lines under "FOR GITHUB PAGES ONLY"
-   and set `basePath` to your repo name (e.g. `/iam-portfolio`).
-2. Run `npm run build` — the static site is emitted to `out/`.
-3. Publish `out/` with GitHub Actions (the official [Next.js deploy workflow](https://github.com/actions/deploy-pages)) or push it to a `gh-pages` branch.
-4. Note: with a `basePath`, also prefix `site.cvUrl` (e.g. `/iam-portfolio/cv/...`).
+Same config changes as Vercel, then import the repo on
+[netlify.com](https://netlify.com) — build command `npm run build`.
 
 ## How to add a custom domain later
 
