@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { site } from "@/data/portfolio";
+import ThemeToggle from "./ThemeToggle";
 
 const NAV_LINKS = [
   { href: "#about", label: "About" },
@@ -24,21 +25,24 @@ export default function Navbar() {
           {site.name.toLowerCase().replace(/\s+/g, "-")}
         </a>
 
-        {/* Desktop links */}
-        <ul className="hidden items-center gap-6 md:flex">
-          {NAV_LINKS.map((link) => (
-            <li key={link.href}>
-              <a href={link.href} className="text-sm text-muted transition hover:text-ink">
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+        <div className="flex items-center gap-2 md:gap-5">
+          {/* Desktop links */}
+          <ul className="hidden items-center gap-6 md:flex">
+            {NAV_LINKS.map((link) => (
+              <li key={link.href}>
+                <a href={link.href} className="text-sm text-muted transition hover:text-ink">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
 
-        {/* Mobile menu toggle */}
-        <button
-          type="button"
-          className="rounded-md border border-edge p-2 text-muted transition hover:text-ink md:hidden"
+          <ThemeToggle />
+
+          {/* Mobile menu toggle */}
+          <button
+            type="button"
+            className="rounded-md border border-edge p-2 text-muted transition hover:text-ink md:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label={open ? "Close menu" : "Open menu"}
@@ -53,7 +57,8 @@ export default function Navbar() {
               <path d="M4 7h16M4 12h16M4 17h16" />
             </svg>
           )}
-        </button>
+          </button>
+        </div>
       </nav>
 
       {/* Mobile menu */}

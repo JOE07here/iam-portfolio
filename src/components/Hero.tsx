@@ -19,14 +19,18 @@ export default function Hero() {
             {hero.availability}
           </p>
 
-          <h1 className="mt-6 max-w-4xl text-4xl font-bold leading-tight tracking-tight text-ink sm:text-5xl lg:text-6xl">
-            {hero.headline.split("|").map((part, i) => (
+          <h1 className="mt-6 text-5xl font-bold tracking-tight text-ink sm:text-6xl lg:text-7xl">
+            {site.name}
+          </h1>
+
+          <p className="mt-5 max-w-4xl text-xl font-semibold leading-snug text-ink/90 sm:text-2xl">
+            {hero.tagline.split("|").map((part, i) => (
               <span key={i}>
                 {i > 0 && <span className="text-accent"> | </span>}
                 {part.trim()}
               </span>
             ))}
-          </h1>
+          </p>
 
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">{hero.subheadline}</p>
 

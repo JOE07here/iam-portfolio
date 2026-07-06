@@ -20,9 +20,27 @@
   --font-mono: var(--font-jetbrains-mono), ui-monospace, "SF Mono", monospace;
 }
 
+/* Light theme — activated by adding the `light` class to <html>
+   (see components/ThemeToggle.tsx). Dark is the default. */
+html.light {
+  --color-background: #f5f7fb;
+  --color-surface: #ffffff;
+  --color-panel: #eaeff7;
+  --color-edge: #d7dfeb;
+  --color-ink: #0f1a2e;
+  --color-muted: #51617a;
+  --color-accent: #0369a1; /* darker cyan for readable contrast on light */
+  --color-accent-alt: #047857;
+}
+
 html {
+  --grid-line: rgba(56, 189, 248, 0.05);
   color-scheme: dark;
   scroll-behavior: smooth;
+}
+html.light {
+  --grid-line: rgba(3, 105, 161, 0.08);
+  color-scheme: light;
 }
 
 ::selection {
@@ -56,8 +74,8 @@ html {
 
 /* Subtle blueprint grid used behind the hero */
 .bg-grid {
-  background-image: linear-gradient(to right, rgba(56, 189, 248, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
+  background-image: linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
   background-size: 44px 44px;
   mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 35%, transparent 100%);
 }
@@ -82,6 +100,18 @@ html {
   .btn-ghost {
     @apply border border-edge text-muted hover:border-muted hover:text-ink;
   }
+}
+
+/* Theme toggle icons — CSS decides which icon shows, so the button
+   needs no React state and can't mismatch during hydration */
+.theme-icon-sun {
+  display: none;
+}
+html.light .theme-icon-sun {
+  display: block;
+}
+html.light .theme-icon-moon {
+  display: none;
 }
 
 /* Scroll-reveal animation (driven by components/Reveal.tsx).

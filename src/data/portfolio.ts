@@ -60,7 +60,8 @@ export const site = {
  * ---------------------------------------------------------------------------*/
 export const hero = {
   availability: "Open to IAM & Identity Security opportunities",
-  headline: "Identity & Access Management | Cybersecurity | Cloud Identity",
+  // Shown under your name (the name itself comes from site.name above)
+  tagline: "Identity & Access Management | Cybersecurity | Cloud Identity",
   subheadline:
     "M.Sc. Cyber Security student and IAM working student in Germany, focused on identity governance, access management, Zero Trust IAM, and non-human identity security.",
   badges: ["Okta", "MidPoint", "Keycloak", "Entra ID", "ServiceNow", "SC-100", "SC-300"],
