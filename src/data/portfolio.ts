@@ -279,8 +279,9 @@ export const certifications: Certification[] = [
     code: "SC-100",
     name: "Microsoft Certified: Cybersecurity Architect Expert",
     issuer: "Microsoft",
-    period: "", // EDIT: add validity dates, e.g. "2026 — 2028" (leave "" to hide the date line)
-    credentialUrl: "", // EDIT: paste your SC-100 verify link (from LinkedIn / Microsoft Learn)
+    period: "2025 — 2027",
+    credentialUrl:
+      "https://learn.microsoft.com/en-us/users/joemonjohnson-5555/credentials/f7f30c5bf0f8de6b",
   },
   {
     code: "SC-300",
