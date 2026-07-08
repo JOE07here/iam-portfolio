@@ -60,8 +60,15 @@ export const site = {
  * ---------------------------------------------------------------------------*/
 export const hero = {
   availability: "Open to IAM & Identity Security roles — Germany / EU",
-  // Shown under your name (the name itself comes from site.name above)
-  tagline: "Identity & Access Management | Cybersecurity | Cloud Identity",
+  // Cycled by the typewriter line under your name (name comes from site.name).
+  // Add/remove/reorder freely — the animation adapts.
+  taglines: [
+    "Identity & Access Management",
+    "Cybersecurity",
+    "Cloud Identity",
+    "Zero Trust IAM",
+    "Non-Human Identity Governance",
+  ],
   subheadline:
     "M.Sc. Cyber Security student and IAM working student in Germany, focused on identity governance, access management, Zero Trust IAM, and non-human identity security.",
   badges: ["Okta", "MidPoint", "Keycloak", "Entra ID", "ServiceNow", "SC-100", "SC-300"],

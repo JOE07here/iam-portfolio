@@ -1,6 +1,7 @@
 import { hero, site } from "@/data/portfolio";
 import Badge from "./Badge";
 import Reveal from "./Reveal";
+import Typewriter from "./Typewriter";
 
 export default function Hero() {
   return (
@@ -21,18 +22,14 @@ export default function Hero() {
 
           <h1 className="mt-6 text-5xl font-bold tracking-tight text-ink sm:text-6xl lg:text-7xl">
             {site.name}
-            <span className="cursor-blink ml-2 text-accent" aria-hidden="true">
-              ▍
-            </span>
           </h1>
 
-          <p className="mt-5 max-w-4xl text-xl font-semibold leading-snug text-ink/90 sm:text-2xl">
-            {hero.tagline.split("|").map((part, i) => (
-              <span key={i}>
-                {i > 0 && <span className="text-accent"> | </span>}
-                {part.trim()}
-              </span>
-            ))}
+          {/* Terminal-style typewriter cycling through the taglines */}
+          <p className="mt-5 min-h-[1.6em] max-w-4xl font-mono text-xl font-semibold leading-snug text-ink/90 sm:text-2xl">
+            <span className="text-accent" aria-hidden="true">
+              ~${" "}
+            </span>
+            <Typewriter phrases={hero.taglines} />
           </p>
 
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">{hero.subheadline}</p>

@@ -59,12 +59,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         className={`${inter.variable} ${jetbrainsMono.variable} bg-background font-sans text-ink antialiased`}
       >
         {/* Runs before first paint: marks JS as available (scroll-reveal hiding
-            is gated on it) and restores a saved light-theme choice without a
-            flash of the wrong theme */}
+            is gated on it) and restores saved theme + palette choices without a
+            flash of the wrong look */}
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "document.documentElement.classList.add('js');try{if(localStorage.getItem('theme')==='light')document.documentElement.classList.add('light')}catch(e){}",
+              "document.documentElement.classList.add('js');try{if(localStorage.getItem('theme')==='light')document.documentElement.classList.add('light');if(localStorage.getItem('palette')==='navy')document.documentElement.classList.add('navy')}catch(e){}",
           }}
         />
         <a href="#main" className="skip-link">

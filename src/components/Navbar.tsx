@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { site } from "@/data/portfolio";
 import ThemeToggle from "./ThemeToggle";
+import PaletteToggle from "./PaletteToggle";
 
 const NAV_LINKS = [
   { href: "#about", label: "About" },
@@ -37,6 +38,7 @@ export default function Navbar() {
             ))}
           </ul>
 
+          <PaletteToggle />
           <ThemeToggle />
 
           {/* Mobile menu toggle */}

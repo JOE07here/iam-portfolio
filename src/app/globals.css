@@ -43,6 +43,36 @@ html.light {
   color-scheme: light;
 }
 
+/* Classic navy palette — the site's original look, toggled via the palette
+   button in the navbar (see components/PaletteToggle.tsx). Combines freely
+   with light/dark. */
+html.navy {
+  --color-background: #060b16;
+  --color-surface: #0b1322;
+  --color-panel: #0f1a2e;
+  --color-edge: #1d2c46;
+  --color-ink: #e7eef8;
+  --color-muted: #94a7c2;
+  --color-accent: #38bdf8;
+  --color-accent-alt: #34d399;
+  --grid-line: rgba(56, 189, 248, 0.05);
+}
+html.navy.light {
+  --color-background: #f5f7fb;
+  --color-surface: #ffffff;
+  --color-panel: #eaeff7;
+  --color-edge: #d7dfeb;
+  --color-ink: #0f1a2e;
+  --color-muted: #51617a;
+  --color-accent: #0369a1;
+  --color-accent-alt: #047857;
+  --grid-line: rgba(3, 105, 161, 0.08);
+}
+html.navy .hero-glow {
+  background: radial-gradient(600px circle at 25% 25%, rgba(56, 189, 248, 0.13), transparent 60%),
+    radial-gradient(500px circle at 80% 10%, rgba(52, 211, 153, 0.07), transparent 60%);
+}
+
 ::selection {
   background: color-mix(in srgb, var(--color-accent) 30%, transparent);
 }

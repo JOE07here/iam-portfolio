@@ -1,6 +1,7 @@
 import { contact, site } from "@/data/portfolio";
 import Section from "./Section";
 import Reveal from "./Reveal";
+import CopyEmail from "./CopyEmail";
 
 export default function Contact() {
   return (
@@ -15,6 +16,8 @@ export default function Contact() {
             <a href={`mailto:${site.email}`} className="btn btn-primary">
               Email Me
             </a>
+            {/* mailto: does nothing on machines without a mail app — copy is the fallback */}
+            <CopyEmail email={site.email} />
             <a href={site.linkedin} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
               LinkedIn <span aria-hidden="true">↗</span>
             </a>
