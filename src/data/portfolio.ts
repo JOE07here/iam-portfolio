@@ -48,10 +48,10 @@ export const site = {
   email: "zgq79z8fsp@privaterelay.appleid.com", // Apple private relay (forwards to you, hides real address)
   linkedin: "https://www.linkedin.com/in/joemon-johnson/", // EDIT: your LinkedIn URL
   github: "https://github.com/JOE07here", // EDIT: your GitHub URL
-  // EDIT: drop your CV into public/cv/ and keep this path in sync.
-  // The "/iam-portfolio" prefix matches the GitHub Pages basePath — remove it
-  // if you move to Vercel/Netlify or a custom domain at the root.
-  cvUrl: "/iam-portfolio/cv/Joemon_Johnson_CV.pdf",
+  // CV button is hidden while this is "". To enable: drop your CV into
+  // public/cv/ and set this to "/iam-portfolio/cv/Joemon_Johnson_CV.pdf"
+  // (drop the "/iam-portfolio" prefix if you move off GitHub Pages).
+  cvUrl: "",
   url: "https://joe07here.github.io/iam-portfolio", // deployed URL (used for SEO / Open Graph)
 };
 
@@ -59,7 +59,7 @@ export const site = {
  * HERO
  * ---------------------------------------------------------------------------*/
 export const hero = {
-  availability: "Open to IAM & Identity Security opportunities",
+  availability: "Open to IAM & Identity Security roles — Germany / EU",
   // Shown under your name (the name itself comes from site.name above)
   tagline: "Identity & Access Management | Cybersecurity | Cloud Identity",
   subheadline:
@@ -74,7 +74,15 @@ export const about = {
   paragraphs: [
     "I work in identity and access management — the part of security that decides who (and what) gets access to which systems, and whether that access can be trusted. I'm currently a working student in Identity Management in Germany, operating enterprise IAM tooling day to day, while completing my M.Sc. in Computer Science with a focus on Cyber Security.",
     "Before moving to Germany, I spent over two years at Capgemini as a Security Analyst / IAM Engineer: integrating single sign-on with SAML and OIDC, running MFA and access-policy programs, and resolving provisioning and synchronization issues across Okta, Active Directory, MidPoint, and ServiceNow. That work taught me where identity systems actually break in production — and how to keep them consistent, auditable, and secure.",
+    "The timing matters: Europe's regulatory wave — NIS2 and DORA — has turned identity governance from good practice into a legal requirement, while Germany alone faces a six-figure shortfall of security professionals. I chose to specialize in identity because it's where compliance, cloud, and security architecture meet.",
     "My direction is deliberate: IAM Engineer today, Identity Security Engineer next, Cybersecurity Architect long-term. Along the way, I'm building research depth in a problem most identity programs haven't solved yet — governing non-human identities: service accounts, API keys, workload identities, and AI agents.",
+  ],
+  // Quick recruiter-facing numbers (all backed by the experience section)
+  stats: [
+    { value: "2+", label: "Years in enterprise IAM" },
+    { value: "5", label: "Security & cloud certifications" },
+    { value: "700+", label: "IAM tickets resolved at 95%+ SLA" },
+    { value: "100%", label: "MFA coverage driven for admin accounts" },
   ],
   facts: [
     { label: "Location", value: "Germany" },
@@ -131,6 +139,8 @@ export const skills: SkillGroup[] = [
       "Risk-Based Access",
       "Identity Threat Surface Analysis",
       "Security Auditing",
+      "Regulatory Drivers: NIS2 · DORA · GDPR",
+      "ISO 27001 (audit support)",
     ],
   },
   {
@@ -303,9 +313,9 @@ export const certifications: Certification[] = [
     code: "AZ-104",
     name: "Microsoft Certified: Azure Administrator Associate",
     issuer: "Microsoft",
-    period: "2024 — 2026", // EDIT: confirm dates
+    period: "2024 — 2027",
     credentialUrl:
-      "https://learn.microsoft.com/api/credentials/share/en-us/JoemonJohnson-5555/9D1F40A458093D55", // EDIT: confirm link
+      "https://learn.microsoft.com/en-us/users/joemonjohnson-5555/credentials/9d1f40a458093d55",
   },
   {
     code: "OKTA",
@@ -326,8 +336,8 @@ export const certificationsNote =
 export const research = {
   title: "Research Focus: Non-Human Identity Governance",
   paragraphs: [
-    "Most identity programs are built for people. Yet in a typical enterprise, non-human identities — service accounts, API keys, workload identities, and increasingly AI agents — outnumber human users many times over, hold standing privileged access, and rarely have a clear owner.",
-    "My research focuses on bringing identity governance discipline to this population: inventorying non-human identities, assigning ownership, scoring risk, and designing access certification processes that scale. It sits at the intersection of identity governance and administration (IGA), Zero Trust architecture, and the emerging question of how autonomous AI agents should be authenticated, authorized, and audited.",
+    "Most identity programs are built for people. Yet non-human identities — service accounts, API keys, workload identities, and increasingly AI agents — now outnumber human users by more than 40 to 1 in a typical enterprise, hold standing privileged access, and rarely have a clear owner. Most organizations cannot even reliably revoke an AI agent's credentials.",
+    "My research focuses on bringing identity governance discipline to this population: inventorying non-human identities, assigning ownership, scoring risk, and designing access certification processes that scale. It sits at the intersection of identity governance and administration (IGA), Zero Trust architecture, and Europe's tightening regulatory baseline (NIS2, DORA) — where access governance is no longer optional — plus the emerging question of how autonomous AI agents should be authenticated, authorized, and audited.",
   ],
   areas: [
     {

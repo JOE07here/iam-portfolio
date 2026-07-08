@@ -21,6 +21,9 @@ export default function Hero() {
 
           <h1 className="mt-6 text-5xl font-bold tracking-tight text-ink sm:text-6xl lg:text-7xl">
             {site.name}
+            <span className="cursor-blink ml-2 text-accent" aria-hidden="true">
+              ▍
+            </span>
           </h1>
 
           <p className="mt-5 max-w-4xl text-xl font-semibold leading-snug text-ink/90 sm:text-2xl">
@@ -38,9 +41,12 @@ export default function Hero() {
             <a href="#projects" className="btn btn-primary">
               View Projects
             </a>
-            <a href={site.cvUrl} className="btn btn-secondary" download>
-              Download CV
-            </a>
+            {/* Appears automatically once site.cvUrl is set in portfolio.ts */}
+            {site.cvUrl ? (
+              <a href={site.cvUrl} className="btn btn-secondary" download>
+                Download CV
+              </a>
+            ) : null}
             <a href="#contact" className="btn btn-ghost">
               Contact Me
             </a>

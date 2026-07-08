@@ -22,6 +22,12 @@ export const metadata: Metadata = {
     "Microsoft Entra ID",
     "Zero Trust",
     "Non-Human Identities",
+    "Identity Governance and Administration",
+    "IGA",
+    "NIS2",
+    "DORA",
+    "Machine Identities",
+    "Germany",
   ],
   authors: [{ name: site.name }],
   openGraph: {
