@@ -17,7 +17,8 @@ export default function Certifications() {
               <p className="font-mono text-2xl font-bold text-accent">{cert.code}</p>
               <h3 className="mt-3 text-sm font-semibold leading-snug text-ink">{cert.name}</h3>
               <p className="mt-2 font-mono text-xs text-muted">
-                {cert.issuer} · {cert.period}
+                {cert.issuer}
+                {cert.period ? ` · ${cert.period}` : ""}
               </p>
               <div className="mt-auto pt-5">
                 {cert.credentialUrl ? (

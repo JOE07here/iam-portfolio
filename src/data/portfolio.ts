@@ -45,7 +45,7 @@ export const site = {
   name: "Joemon Johnson", // EDIT: your name
   role: "IAM Working Student · M.Sc. Cyber Security",
   location: "Germany", // EDIT: add a city if you want, e.g. "Leipzig, Germany"
-  email: "your.email@example.com", // EDIT: your real email address
+  email: "zgq79z8fsp@privaterelay.appleid.com", // Apple private relay (forwards to you, hides real address)
   linkedin: "https://www.linkedin.com/in/joemon-johnson/", // EDIT: your LinkedIn URL
   github: "https://github.com/JOE07here", // EDIT: your GitHub URL
   // EDIT: drop your CV into public/cv/ and keep this path in sync.
@@ -166,9 +166,9 @@ export const skills: SkillGroup[] = [
 export const experience: ExperienceItem[] = [
   {
     role: "Working Student — Identity Management",
-    company: "Enterprise Identity Team", // EDIT: add your employer's name if you're allowed to
+    company: "Enterprise Identity Team", // kept anonymous by request; add employer name here if allowed
     location: "Germany",
-    period: "2025 — Present", // EDIT: exact start month/year
+    period: "Feb 2026 — Present",
     summary:
       "Supporting identity management operations and governance on a production enterprise IAM platform.",
     highlights: [
@@ -279,8 +279,8 @@ export const certifications: Certification[] = [
     code: "SC-100",
     name: "Microsoft Certified: Cybersecurity Architect Expert",
     issuer: "Microsoft",
-    period: "20XX — 20XX", // EDIT: add the validity dates
-    credentialUrl: "", // EDIT: add your credential verify link
+    period: "", // EDIT: add validity dates, e.g. "2026 — 2028" (leave "" to hide the date line)
+    credentialUrl: "", // EDIT: paste your SC-100 verify link (from LinkedIn / Microsoft Learn)
   },
   {
     code: "SC-300",

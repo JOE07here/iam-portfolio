@@ -44,13 +44,17 @@ export default function Projects() {
                 ))}
               </ul>
 
-              <a
-                href={project.caseStudyUrl}
-                className="mt-6 inline-flex items-center gap-1.5 self-start text-sm font-semibold text-accent transition group-hover:gap-2.5"
-              >
-                View Case Study
-                <span aria-hidden="true">→</span>
-              </a>
+              {/* Button appears automatically once a real link is set in
+                  portfolio.ts (anything other than "#"). Hidden while placeholder. */}
+              {project.caseStudyUrl && project.caseStudyUrl !== "#" ? (
+                <a
+                  href={project.caseStudyUrl}
+                  className="mt-6 inline-flex items-center gap-1.5 self-start text-sm font-semibold text-accent transition group-hover:gap-2.5"
+                >
+                  View Case Study
+                  <span aria-hidden="true">→</span>
+                </a>
+              ) : null}
             </article>
           </Reveal>
         ))}
