@@ -15,14 +15,23 @@ export default function Contact() {
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <a href={`mailto:${site.email}`} className="btn btn-primary">
               Email Me
+              <span className="btn-arrow" aria-hidden="true">
+                →
+              </span>
             </a>
             {/* mailto: does nothing on machines without a mail app — copy is the fallback */}
             <CopyEmail email={site.email} />
             <a href={site.linkedin} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
-              LinkedIn <span aria-hidden="true">↗</span>
+              LinkedIn{" "}
+              <span className="btn-arrow" aria-hidden="true">
+                ↗
+              </span>
             </a>
             <a href={site.github} target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
-              GitHub <span aria-hidden="true">↗</span>
+              GitHub{" "}
+              <span className="btn-arrow" aria-hidden="true">
+                ↗
+              </span>
             </a>
           </div>
 

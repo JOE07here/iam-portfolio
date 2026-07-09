@@ -63,11 +63,11 @@ export const hero = {
   // Cycled by the typewriter line under your name (name comes from site.name).
   // Add/remove/reorder freely — the animation adapts.
   taglines: [
-    "Identity & Access Management",
-    "Cybersecurity",
+    "IAM Engineer",
+    "Identity Governance",
     "Cloud Identity",
-    "Zero Trust IAM",
-    "Non-Human Identity Governance",
+    "MidPoint / Okta / Entra ID",
+    "Non-Human Identity Security",
   ],
   subheadline:
     "M.Sc. Cyber Security student and IAM working student in Germany, focused on identity governance, access management, Zero Trust IAM, and non-human identity security.",
@@ -83,13 +83,6 @@ export const about = {
     "Before moving to Germany, I spent over two years at Capgemini as a Security Analyst / IAM Engineer: integrating single sign-on with SAML and OIDC, running MFA and access-policy programs, and resolving provisioning and synchronization issues across Okta, Active Directory, MidPoint, and ServiceNow. That work taught me where identity systems actually break in production — and how to keep them consistent, auditable, and secure.",
     "The timing matters: Europe's regulatory wave — NIS2 and DORA — has turned identity governance from good practice into a legal requirement, while Germany alone faces a six-figure shortfall of security professionals. I chose to specialize in identity because it's where compliance, cloud, and security architecture meet.",
     "My direction is deliberate: IAM Engineer today, Identity Security Engineer next, Cybersecurity Architect long-term. Along the way, I'm building research depth in a problem most identity programs haven't solved yet — governing non-human identities: service accounts, API keys, workload identities, and AI agents.",
-  ],
-  // Quick recruiter-facing numbers (all backed by the experience section)
-  stats: [
-    { value: "2+", label: "Years in enterprise IAM" },
-    { value: "5", label: "Security & cloud certifications" },
-    { value: "700+", label: "IAM tickets resolved at 95%+ SLA" },
-    { value: "100%", label: "MFA coverage driven for admin accounts" },
   ],
   facts: [
     { label: "Location", value: "Germany" },
@@ -334,8 +327,18 @@ export const certifications: Certification[] = [
   },
 ];
 
-export const certificationsNote =
-  "Credential links can be added here — edit src/data/portfolio.ts.";
+/* -----------------------------------------------------------------------------
+ * RECRUITER SNAPSHOT — the six scan-in-five-seconds facts shown right under
+ * the hero. All backed by the experience/certifications sections.
+ * ---------------------------------------------------------------------------*/
+export const recruiterSnapshot = [
+  "2.8+ years IAM experience (Capgemini + working student)",
+  "Germany-based · M.Sc. Cyber Security student",
+  "Working Student — Identity Management",
+  "Okta · MidPoint · Keycloak · Entra ID · ServiceNow",
+  "SC-100 · SC-300 · SC-900 · AZ-104 · Okta Certified Professional",
+  "700+ IAM tickets · 95%+ SLA adherence",
+];
 
 /* -----------------------------------------------------------------------------
  * RESEARCH / THESIS DIRECTION

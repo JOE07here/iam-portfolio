@@ -9,17 +9,6 @@ export default function About() {
       eyebrow="01 · About"
       title="IAM engineer by practice, security architect by direction."
     >
-      <Reveal>
-        <div className="mb-12 grid grid-cols-2 gap-4 sm:grid-cols-4">
-          {about.stats.map((stat) => (
-            <div key={stat.label} className="rounded-xl border border-edge bg-surface p-5">
-              <p className="font-mono text-2xl font-bold text-accent">{stat.value}</p>
-              <p className="mt-1 text-xs leading-snug text-muted">{stat.label}</p>
-            </div>
-          ))}
-        </div>
-      </Reveal>
-
       <div className="grid gap-10 lg:grid-cols-[2fr_1fr]">
         <Reveal className="space-y-5">
           {about.paragraphs.map((paragraph, i) => (

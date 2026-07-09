@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import RecruiterSnapshot from "@/components/RecruiterSnapshot";
 import About from "@/components/About";
 import Skills from "@/components/Skills";
 import Experience from "@/components/Experience";
@@ -15,6 +16,7 @@ export default function Home() {
       <Navbar />
       <main id="main">
         <Hero />
+        <RecruiterSnapshot />
         <About />
         <Skills />
         <Experience />

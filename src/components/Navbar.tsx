@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { site } from "@/data/portfolio";
-import ThemeToggle from "./ThemeToggle";
 import PaletteToggle from "./PaletteToggle";
 
 const NAV_LINKS = [
@@ -31,7 +30,7 @@ export default function Navbar() {
           <ul className="hidden items-center gap-6 md:flex">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
-                <a href={link.href} className="text-sm text-muted transition hover:text-ink">
+                <a href={link.href} className="nav-link text-sm text-muted transition hover:text-ink">
                   {link.label}
                 </a>
               </li>
@@ -39,7 +38,6 @@ export default function Navbar() {
           </ul>
 
           <PaletteToggle />
-          <ThemeToggle />
 
           {/* Mobile menu toggle */}
           <button

@@ -1,18 +1,19 @@
 @import "tailwindcss";
 
 /* -----------------------------------------------------------------------------
- * Design tokens — dark navy cybersecurity theme.
- * These become Tailwind utilities automatically (e.g. bg-surface, text-accent).
+ * Design tokens. The values here are the default palette (Identity Blue);
+ * the other palettes override them via html[data-theme="..."] below.
+ * All become Tailwind utilities automatically (bg-surface, text-accent, ...).
  * ---------------------------------------------------------------------------*/
 @theme {
-  --color-background: #060907; /* page background: terminal green-black */
-  --color-surface: #0b110d; /* cards */
-  --color-panel: #101812; /* nested panels / chips */
-  --color-edge: #1f2d23; /* borders */
-  --color-ink: #e8f2ea; /* primary text */
-  --color-muted: #96a99b; /* secondary text */
-  --color-accent: #4ade80; /* terminal green accent */
-  --color-accent-alt: #22d3ee; /* subtle cyan second accent */
+  --color-background: #060b16; /* page background */
+  --color-surface: #0b1322; /* cards */
+  --color-panel: #0f1a2e; /* nested panels / chips */
+  --color-edge: #1d2c46; /* borders */
+  --color-ink: #e7eef8; /* primary text */
+  --color-muted: #94a7c2; /* secondary text */
+  --color-accent: #38bdf8; /* primary accent */
+  --color-accent-alt: #34d399; /* secondary accent */
 }
 
 @theme inline {
@@ -20,57 +21,97 @@
   --font-mono: var(--font-jetbrains-mono), ui-monospace, "SF Mono", monospace;
 }
 
-/* Light theme — activated by adding the `light` class to <html>
-   (see components/ThemeToggle.tsx). Dark is the default. */
-html.light {
-  --color-background: #f4f8f5;
-  --color-surface: #ffffff;
-  --color-panel: #e9f1ea;
-  --color-edge: #d3e0d6;
-  --color-ink: #0d1710;
-  --color-muted: #4c6153;
-  --color-accent: #047857; /* darker green for readable contrast on light */
-  --color-accent-alt: #0e7490;
-}
-
+/* -----------------------------------------------------------------------------
+ * Theme palettes. Selected via html[data-theme] — either automatically by
+ * components/ThemeConductor.tsx (slow rotation + per-section adaptation) or
+ * manually via the palette button (components/PaletteToggle.tsx).
+ *
+ *   blue    — Identity Blue (default, defined in @theme above)
+ *   purple  — Zero Trust Purple
+ *   green   — Terminal Green
+ *   silver  — Cloud Silver (light; manual-only, excluded from auto-rotation
+ *             because dark→light flips mid-read are jarring, not subtle)
+ *   aurora  — Research Aurora
+ * ---------------------------------------------------------------------------*/
 html {
-  --grid-line: rgba(74, 222, 128, 0.05);
+  --grid-line: rgba(56, 189, 248, 0.05);
+  --glow-a: rgba(56, 189, 248, 0.13);
+  --glow-b: rgba(52, 211, 153, 0.07);
   color-scheme: dark;
   scroll-behavior: smooth;
 }
-html.light {
-  --grid-line: rgba(4, 120, 87, 0.08);
-  color-scheme: light;
+
+html[data-theme="purple"] {
+  --color-background: #0a0714;
+  --color-surface: #120d22;
+  --color-panel: #171130;
+  --color-edge: #2b2350;
+  --color-ink: #ece7f8;
+  --color-muted: #a49ac2;
+  --color-accent: #a78bfa;
+  --color-accent-alt: #22d3ee;
+  --grid-line: rgba(167, 139, 250, 0.05);
+  --glow-a: rgba(167, 139, 250, 0.12);
+  --glow-b: rgba(34, 211, 238, 0.06);
 }
 
-/* Classic navy palette — the site's original look, toggled via the palette
-   button in the navbar (see components/PaletteToggle.tsx). Combines freely
-   with light/dark. */
-html.navy {
-  --color-background: #060b16;
-  --color-surface: #0b1322;
-  --color-panel: #0f1a2e;
-  --color-edge: #1d2c46;
-  --color-ink: #e7eef8;
-  --color-muted: #94a7c2;
-  --color-accent: #38bdf8;
-  --color-accent-alt: #34d399;
-  --grid-line: rgba(56, 189, 248, 0.05);
+html[data-theme="green"] {
+  --color-background: #060907;
+  --color-surface: #0b110d;
+  --color-panel: #101812;
+  --color-edge: #1f2d23;
+  --color-ink: #e8f2ea;
+  --color-muted: #96a99b;
+  --color-accent: #4ade80;
+  --color-accent-alt: #22d3ee;
+  --grid-line: rgba(74, 222, 128, 0.05);
+  --glow-a: rgba(74, 222, 128, 0.1);
+  --glow-b: rgba(34, 211, 238, 0.06);
 }
-html.navy.light {
-  --color-background: #f5f7fb;
+
+html[data-theme="silver"] {
+  --color-background: #f4f6f8;
   --color-surface: #ffffff;
-  --color-panel: #eaeff7;
-  --color-edge: #d7dfeb;
-  --color-ink: #0f1a2e;
-  --color-muted: #51617a;
+  --color-panel: #e9edf2;
+  --color-edge: #d5dce4;
+  --color-ink: #101826;
+  --color-muted: #4e5d70;
   --color-accent: #0369a1;
   --color-accent-alt: #047857;
   --grid-line: rgba(3, 105, 161, 0.08);
+  --glow-a: rgba(3, 105, 161, 0.07);
+  --glow-b: rgba(4, 120, 87, 0.05);
+  color-scheme: light;
 }
-html.navy .hero-glow {
-  background: radial-gradient(600px circle at 25% 25%, rgba(56, 189, 248, 0.13), transparent 60%),
-    radial-gradient(500px circle at 80% 10%, rgba(52, 211, 153, 0.07), transparent 60%);
+
+html[data-theme="aurora"] {
+  --color-background: #050e14;
+  --color-surface: #0a1a20;
+  --color-panel: #0e242c;
+  --color-edge: #1b3a44;
+  --color-ink: #e6f4f4;
+  --color-muted: #8fb0b4;
+  --color-accent: #2dd4bf;
+  --color-accent-alt: #a78bfa;
+  --grid-line: rgba(45, 212, 191, 0.05);
+  --glow-a: rgba(45, 212, 191, 0.11);
+  --glow-b: rgba(167, 139, 250, 0.07);
+}
+
+/* Smooth cross-fade while a theme change is in flight. ThemeConductor adds
+   .theme-anim for ~1.2s around each switch, so this never fights the
+   scroll-reveal transitions outside that window (.reveal is excluded). */
+html.theme-anim body,
+html.theme-anim *:not(.reveal),
+html.theme-anim *:not(.reveal)::before,
+html.theme-anim *:not(.reveal)::after {
+  transition:
+    background-color 1s ease,
+    border-color 1s ease,
+    color 1s ease,
+    fill 1s ease,
+    stroke 1s ease,
+    box-shadow 1s ease;
 }
 
 ::selection {
@@ -110,24 +151,19 @@ html.navy .hero-glow {
   mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 35%, transparent 100%);
 }
 
-/* Soft radial glows behind the hero headline */
+/* Soft radial glows behind the hero headline (colors follow the theme) */
 .hero-glow {
-  background: radial-gradient(600px circle at 25% 25%, rgba(74, 222, 128, 0.1), transparent 60%),
-    radial-gradient(500px circle at 80% 10%, rgba(34, 211, 238, 0.06), transparent 60%);
+  background: radial-gradient(600px circle at 25% 25%, var(--glow-a), transparent 60%),
+    radial-gradient(500px circle at 80% 10%, var(--glow-b), transparent 60%);
 }
 
-/* Terminal-style blinking cursor after the hero name */
+/* Terminal-style blinking cursor on the hero typewriter line */
 .cursor-blink {
   animation: cursor-blink 1.1s steps(2, start) infinite;
 }
 @keyframes cursor-blink {
   to {
     visibility: hidden;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .cursor-blink {
-    animation: none;
   }
 }
 
@@ -147,16 +183,45 @@ html.navy .hero-glow {
   }
 }
 
-/* Theme toggle icons — CSS decides which icon shows, so the button
-   needs no React state and can't mismatch during hydration */
-.theme-icon-sun {
-  display: none;
+/* Animated arrow inside buttons — nudges right on hover */
+.btn .btn-arrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
 }
-html.light .theme-icon-sun {
-  display: block;
+.btn:hover .btn-arrow {
+  transform: translateX(3px);
 }
-html.light .theme-icon-moon {
-  display: none;
+
+/* Navbar links — accent underline grows in from the left on hover/focus */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 1px;
+  width: 100%;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* Soft accent glow for skill/tool badges on hover */
+.badge-glow:hover {
+  border-color: color-mix(in srgb, var(--color-accent) 60%, transparent);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--color-accent) 22%, transparent);
+}
+
+/* Accent-tinted lift shadow for cards on hover */
+.card-glow:hover {
+  box-shadow: 0 16px 40px -20px color-mix(in srgb, var(--color-accent) 45%, transparent);
 }
 
 /* Scroll-reveal animation (driven by components/Reveal.tsx).
@@ -180,6 +245,19 @@ html.js .reveal:not(.reveal-visible) {
     transform: none;
   }
   .reveal {
+    transition: none;
+  }
+  .cursor-blink {
+    animation: none;
+  }
+  html.theme-anim body,
+  html.theme-anim *:not(.reveal),
+  html.theme-anim *:not(.reveal)::before,
+  html.theme-anim *:not(.reveal)::after {
+    transition: none;
+  }
+  .btn .btn-arrow,
+  .nav-link::after {
     transition: none;
   }
 }

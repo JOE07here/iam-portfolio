@@ -9,12 +9,12 @@ export default function Projects() {
       id="projects"
       eyebrow="04 · Projects"
       title="Projects & case studies."
-      description="Selected work across identity governance, federation, lifecycle automation, and non-human identity security. Case-study links are placeholders — they'll point to write-ups as they're published."
+      description="Selected work across identity governance, federation, lifecycle automation, and non-human identity security."
     >
       <div className="grid gap-6 md:grid-cols-2">
         {projects.map((project, i) => (
           <Reveal key={project.title} delay={(i % 2) * 80}>
-            <article className="group flex h-full flex-col rounded-xl border border-edge bg-surface p-6 transition duration-300 hover:-translate-y-1 hover:border-accent/60 sm:p-8">
+            <article className="card-glow group flex h-full flex-col rounded-xl border border-edge bg-surface p-6 transition duration-300 hover:-translate-y-1 hover:border-accent/60 sm:p-8">
               <h3 className="text-lg font-semibold leading-snug text-ink">{project.title}</h3>
 
               <dl className="mt-5 space-y-4 text-sm">
@@ -44,8 +44,8 @@ export default function Projects() {
                 ))}
               </ul>
 
-              {/* Button appears automatically once a real link is set in
-                  portfolio.ts (anything other than "#"). Hidden while placeholder. */}
+              {/* Real link (anything other than "#") renders the button;
+                  otherwise a non-clickable "coming soon" note. */}
               {project.caseStudyUrl && project.caseStudyUrl !== "#" ? (
                 <a
                   href={project.caseStudyUrl}
@@ -54,7 +54,11 @@ export default function Projects() {
                   View Case Study
                   <span aria-hidden="true">→</span>
                 </a>
-              ) : null}
+              ) : (
+                <span className="mt-6 self-start font-mono text-xs uppercase tracking-wider text-muted/70">
+                  Case study coming soon
+                </span>
+              )}
             </article>
           </Reveal>
         ))}

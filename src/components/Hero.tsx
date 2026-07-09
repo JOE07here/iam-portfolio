@@ -37,6 +37,9 @@ export default function Hero() {
           <div className="mt-9 flex flex-wrap gap-4">
             <a href="#projects" className="btn btn-primary">
               View Projects
+              <span className="btn-arrow" aria-hidden="true">
+                →
+              </span>
             </a>
             {/* Appears automatically once site.cvUrl is set in portfolio.ts */}
             {site.cvUrl ? (
@@ -46,6 +49,9 @@ export default function Hero() {
             ) : null}
             <a href="#contact" className="btn btn-ghost">
               Contact Me
+              <span className="btn-arrow" aria-hidden="true">
+                →
+              </span>
             </a>
           </div>
 
