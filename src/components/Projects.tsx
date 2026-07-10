@@ -9,7 +9,7 @@ export default function Projects() {
       id="projects"
       eyebrow="04 · Projects"
       title="Projects & case studies."
-      description="Selected work across identity governance, federation, lifecycle automation, and non-human identity security."
+      description="Selected work across identity governance, federation, and non-human identity security."
     >
       <div className="grid gap-6 md:grid-cols-2">
         {projects.map((project, i) => (
@@ -44,21 +44,18 @@ export default function Projects() {
                 ))}
               </ul>
 
-              {/* Real link (anything other than "#") renders the button;
-                  otherwise a non-clickable "coming soon" note. */}
-              {project.caseStudyUrl && project.caseStudyUrl !== "#" ? (
+              {/* Rendered only when a real URL exists — nothing shows otherwise */}
+              {project.caseStudyUrl ? (
                 <a
                   href={project.caseStudyUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="mt-6 inline-flex items-center gap-1.5 self-start text-sm font-semibold text-accent transition group-hover:gap-2.5"
                 >
-                  View Case Study
-                  <span aria-hidden="true">→</span>
+                  View Project
+                  <span aria-hidden="true">↗</span>
                 </a>
-              ) : (
-                <span className="mt-6 self-start font-mono text-xs uppercase tracking-wider text-muted/70">
-                  Case study coming soon
-                </span>
-              )}
+              ) : null}
             </article>
           </Reveal>
         ))}

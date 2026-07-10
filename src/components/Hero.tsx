@@ -24,8 +24,13 @@ export default function Hero() {
             {site.name}
           </h1>
 
-          {/* Terminal-style typewriter cycling through the taglines */}
-          <p className="mt-5 min-h-[1.6em] max-w-4xl font-mono text-xl font-semibold leading-snug text-ink/90 sm:text-2xl">
+          {/* Static lead line — the professional identity, always readable */}
+          <p className="mt-5 max-w-4xl text-xl font-semibold leading-snug text-ink/90 sm:text-2xl">
+            {hero.roleLine}
+          </p>
+
+          {/* Subtle terminal-style typewriter cycling through focus areas */}
+          <p className="mt-3 min-h-[1.5em] max-w-4xl font-mono text-sm text-muted sm:text-base">
             <span className="text-accent" aria-hidden="true">
               ~${" "}
             </span>

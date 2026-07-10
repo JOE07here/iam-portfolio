@@ -27,6 +27,7 @@ export type Project = {
   built: string;
   tools: string[];
   outcome: string;
+  /** Live demo / write-up URL. Leave "" — the link is hidden until set. */
   caseStudyUrl: string;
 };
 
@@ -39,18 +40,33 @@ export type Certification = {
 };
 
 /* -----------------------------------------------------------------------------
+ * PROFESSIONAL EMAIL
+ *
+ * EDIT: put your real, recruiter-reachable email address here (e.g. a Gmail,
+ * Outlook, or custom-domain address). While this is "", the site shows NO
+ * email anywhere — the Email/Copy buttons and the address line are hidden.
+ * Do NOT use the Apple private-relay address: relay addresses can silently
+ * drop mail from senders Apple hasn't approved, so recruiters may not reach
+ * you.
+ * ---------------------------------------------------------------------------*/
+export const PROFESSIONAL_EMAIL = ""; // EDIT: e.g. "joemon.johnson@example.com"
+
+/* -----------------------------------------------------------------------------
  * SITE / IDENTITY — name, links, CV, deployed URL
  * ---------------------------------------------------------------------------*/
 export const site = {
-  name: "Joemon Johnson", // EDIT: your name
-  role: "IAM Working Student · M.Sc. Cyber Security",
+  name: "Joemon Johnson",
+  role: "IAM Engineer · Identity Security · Cloud Identity",
   location: "Germany", // EDIT: add a city if you want, e.g. "Leipzig, Germany"
-  email: "zgq79z8fsp@privaterelay.appleid.com", // Apple private relay (forwards to you, hides real address)
-  linkedin: "https://www.linkedin.com/in/joemon-johnson/", // EDIT: your LinkedIn URL
-  github: "https://github.com/JOE07here", // EDIT: your GitHub URL
-  // CV button is hidden while this is "". To enable: drop your CV into
-  // public/cv/ and set this to "/iam-portfolio/cv/Joemon_Johnson_CV.pdf"
-  // (drop the "/iam-portfolio" prefix if you move off GitHub Pages).
+  email: PROFESSIONAL_EMAIL,
+  linkedin: "https://www.linkedin.com/in/joemon-johnson/",
+  github: "https://github.com/JOE07here",
+  /* CV BUTTON — hidden while cvUrl is "".
+     To enable it:
+       1. Export your CV as PDF and copy it to  public/cv/Joemon_Johnson_CV.pdf
+       2. Set cvUrl to "/iam-portfolio/cv/Joemon_Johnson_CV.pdf"
+          (the "/iam-portfolio" prefix matches the GitHub Pages basePath —
+          drop it if the site ever moves to a root domain). */
   cvUrl: "",
   url: "https://joe07here.github.io/iam-portfolio", // deployed URL (used for SEO / Open Graph)
 };
@@ -60,8 +76,9 @@ export const site = {
  * ---------------------------------------------------------------------------*/
 export const hero = {
   availability: "Open to IAM & Identity Security roles — Germany / EU",
-  // Cycled by the typewriter line under your name (name comes from site.name).
-  // Add/remove/reorder freely — the animation adapts.
+  // The static lead line under your name.
+  roleLine: "IAM Engineer · Identity Security · Cloud Identity",
+  // Cycled by the small typewriter line. Add/remove/reorder freely.
   taglines: [
     "IAM Engineer",
     "Identity Governance",
@@ -70,7 +87,7 @@ export const hero = {
     "Non-Human Identity Security",
   ],
   subheadline:
-    "M.Sc. Cyber Security student and IAM working student in Germany, focused on identity governance, access management, Zero Trust IAM, and non-human identity security.",
+    "2.8+ years of enterprise IAM experience across Okta, MidPoint, Microsoft Entra ID, Keycloak, and ServiceNow — currently working as an Identity Management working student in Germany while completing an M.Sc. in Computer Science with a focus on Cyber Security.",
   badges: ["Okta", "MidPoint", "Keycloak", "Entra ID", "ServiceNow", "SC-100", "SC-300"],
 };
 
@@ -79,92 +96,105 @@ export const hero = {
  * ---------------------------------------------------------------------------*/
 export const about = {
   paragraphs: [
-    "I work in identity and access management — the part of security that decides who (and what) gets access to which systems, and whether that access can be trusted. I'm currently a working student in Identity Management in Germany, operating enterprise IAM tooling day to day, while completing my M.Sc. in Computer Science with a focus on Cyber Security.",
+    "I work in identity and access management — the part of security that decides who (and what) gets access to which systems, and whether that access can be trusted. Today I support a production enterprise IAM platform as an Identity Management working student in Germany, alongside my M.Sc. in Computer Science with a focus on Cyber Security.",
     "Before moving to Germany, I spent over two years at Capgemini as a Security Analyst / IAM Engineer: integrating single sign-on with SAML and OIDC, running MFA and access-policy programs, and resolving provisioning and synchronization issues across Okta, Active Directory, MidPoint, and ServiceNow. That work taught me where identity systems actually break in production — and how to keep them consistent, auditable, and secure.",
-    "The timing matters: Europe's regulatory wave — NIS2 and DORA — has turned identity governance from good practice into a legal requirement, while Germany alone faces a six-figure shortfall of security professionals. I chose to specialize in identity because it's where compliance, cloud, and security architecture meet.",
-    "My direction is deliberate: IAM Engineer today, Identity Security Engineer next, Cybersecurity Architect long-term. Along the way, I'm building research depth in a problem most identity programs haven't solved yet — governing non-human identities: service accounts, API keys, workload identities, and AI agents.",
+    "My direction is deliberate: IAM Engineer today, Identity Security Engineer next, Cybersecurity Architect long-term. Along the way I'm building research depth in a problem most identity programs haven't solved yet — governing non-human identities: service accounts, API keys, workload identities, and AI agents.",
   ],
   facts: [
     { label: "Location", value: "Germany" },
     { label: "Currently", value: "Working Student — Identity Management" },
-    { label: "Education", value: "M.Sc. Computer Science (Cyber Security)" },
+    { label: "Education", value: "M.Sc. Computer Science — Focus on Cyber Security" },
     { label: "Previously", value: "Security Analyst / IAM Engineer, Capgemini" },
     { label: "Direction", value: "IAM → Identity Security → Cybersecurity Architect" },
   ],
 };
 
 /* -----------------------------------------------------------------------------
- * SKILLS
+ * EDUCATION & LANGUAGES
+ * ---------------------------------------------------------------------------*/
+export const education = {
+  degree: "M.Sc. Computer Science — Focus on Cyber Security",
+  school: "SRH University of Applied Sciences Heidelberg, Campus Leipzig",
+  graduation: "Expected graduation: March 2027",
+  previous: "B.Tech Electronics & Communication Engineering — Karunya Institute of Technology and Sciences, India",
+};
+
+export const languages = [
+  { name: "English", level: "B2 · IELTS 6.5" },
+  { name: "German", level: "A1 · currently working toward B1" },
+];
+
+/* -----------------------------------------------------------------------------
+ * AVAILABILITY / LOCATION — shown in the Contact section.
+ * Only rows with a non-empty value are rendered; leave "" to hide a row.
+ * Do not fill in anything that hasn't been confirmed.
+ * ---------------------------------------------------------------------------*/
+export const availabilityInfo = [
+  { label: "Location", value: "Germany" },
+  { label: "Open to", value: "IAM, Identity Security & Cloud Identity roles — Germany / EU" },
+  { label: "Work authorization", value: "" }, // EDIT: e.g. "German student visa — 20h/week permitted" (only if you want it public)
+  { label: "Available from", value: "" }, // EDIT: e.g. "Full-time from April 2027"
+];
+
+/* -----------------------------------------------------------------------------
+ * SKILLS — grouped the way IAM recruiters scan for them.
  * ---------------------------------------------------------------------------*/
 export const skills: SkillGroup[] = [
   {
-    title: "Identity & Access Management",
-    skills: [
-      "SSO (SAML, OIDC)",
-      "OAuth 2.0",
-      "MFA",
-      "RBAC & ABAC",
-      "Lifecycle Management (JML)",
-      "SCIM Provisioning",
-      "LDAP",
-      "Privileged Access (PAM)",
-    ],
-  },
-  {
-    title: "Identity Governance",
+    title: "Identity Governance & Administration",
     skills: [
       "Access Reviews & Certification",
-      "Role Modeling",
+      "Role Modeling / RBAC",
       "Segregation of Duties",
       "Least Privilege",
       "Entitlement Management",
-      "Audit & Compliance Support",
+      "Lifecycle Management (JML)",
+    ],
+  },
+  {
+    title: "IAM Platforms",
+    skills: [
+      "Okta",
+      "MidPoint",
+      "Keycloak",
+      "Microsoft Entra ID / Azure AD",
+      "Active Directory",
+      "ServiceNow (ITSM)",
+    ],
+  },
+  {
+    title: "Federation & Authentication",
+    skills: [
+      "SAML",
+      "OIDC / OAuth 2.0",
+      "SSO Integration",
+      "MFA",
+      "SCIM Provisioning",
+      "LDAP",
     ],
   },
   {
     title: "Cloud Identity",
     skills: [
-      "Microsoft Entra ID / Azure AD",
+      "Microsoft Entra ID",
       "Conditional Access",
       "Hybrid Identity",
-      "Azure Administration",
-      "Federation & Trust",
+      "Azure Administration (AZ-104)",
     ],
   },
   {
-    title: "Security Concepts",
+    title: "Automation & Scripting",
+    skills: ["PowerShell", "REST APIs", "Python (working knowledge)", "SQL (working knowledge)", "Git"],
+  },
+  {
+    title: "Security & Compliance",
     skills: [
       "Zero Trust Architecture",
       "Non-Human Identity Security",
-      "Risk-Based Access",
-      "Identity Threat Surface Analysis",
-      "Security Auditing",
-      "Regulatory Drivers: NIS2 · DORA · GDPR",
+      "Security Audit Support",
       "ISO 27001 (audit support)",
-    ],
-  },
-  {
-    title: "Tools & Platforms",
-    skills: [
-      "Okta",
-      "MidPoint",
-      "Keycloak",
-      "Microsoft Entra ID",
-      "Active Directory",
-      "ServiceNow",
-      "Jira",
-      "Confluence",
-    ],
-  },
-  {
-    title: "Programming & Scripting",
-    skills: [
-      "PowerShell",
-      "Python (basics)",
-      "SQL (basics)",
-      "JavaScript / TypeScript (basics)",
-      "REST APIs",
-      "Git",
+      "NIS2 / DORA awareness",
+      "GDPR awareness",
     ],
   },
 ];
@@ -193,7 +223,7 @@ export const experience: ExperienceItem[] = [
     role: "Security Analyst / IAM Engineer",
     company: "Capgemini",
     location: "Bengaluru, India",
-    period: "Feb 2023 — Sep 2025", // EDIT: adjust if needed
+    period: "Feb 2023 — Sep 2025",
     summary:
       "IAM operations and engineering across Okta, Active Directory, MidPoint, and ServiceNow in an enterprise environment.",
     highlights: [
@@ -207,21 +237,20 @@ export const experience: ExperienceItem[] = [
 ];
 
 /* -----------------------------------------------------------------------------
- * PROJECTS
- * caseStudyUrl: "#" is a placeholder — EDIT each one to link a write-up,
- * GitHub repo, or blog post when it's ready.
+ * PROJECTS — fewer, stronger, verifiable.
+ * caseStudyUrl "" hides the link entirely (no disabled button is rendered).
  * ---------------------------------------------------------------------------*/
 export const projects: Project[] = [
   {
-    title: "Risk-Based Access Certification for Non-Human Identities",
+    title: "CyberLens — Non-Human Identity Scanner (formerly AgentLens)",
     problem:
-      "Access certification campaigns are designed around human users. Service accounts, API keys, and workload identities are often rubber-stamped or skipped entirely — even though they frequently hold the most privileged, least-monitored access in the environment.",
+      "AI agents and service accounts act with real credentials and real permissions, but most identity programs cannot easily inventory them — let alone certify, scope, or de-provision their access.",
     built:
-      "Designed a risk-scoring approach for non-human identities based on privilege level, credential age, last authentication, and ownership status — and prototyped how risk-ranked certification queues could replace flat, all-at-once review campaigns.",
-    tools: ["Identity Governance", "MidPoint", "Risk Scoring", "Access Certification", "Zero Trust"],
+      "Built a browser-based scanner that inspects MidPoint and Keycloak configurations to surface risky agent and service identities: stale credentials, excessive privileges, and missing ownership. Runs fully client-side — no identity data leaves the browser.",
+    tools: ["Next.js", "TypeScript", "MidPoint", "Keycloak", "Non-Human Identity"],
     outcome:
-      "Forms the foundation of my master's research direction. Demonstrated that a small set of measurable signals can meaningfully prioritize which non-human identities get reviewed first.",
-    caseStudyUrl: "#", // EDIT: link the case study when published
+      "A working, publicly hosted prototype and a sharper thesis question: what does lifecycle governance look like when the identity is an autonomous agent?",
+    caseStudyUrl: "https://joe07here.github.io/cyberlens/",
   },
   {
     title: "MidPoint Role Assignment and 409 Conflict Analysis",
@@ -232,18 +261,7 @@ export const projects: Project[] = [
     tools: ["MidPoint", "REST APIs", "RBAC", "Concurrency Analysis", "Troubleshooting"],
     outcome:
       "Documented root-cause analysis with safe retry and sequencing recommendations — turning a recurring operational failure into an understood, documented behavior.",
-    caseStudyUrl: "#", // EDIT: link the case study when published
-  },
-  {
-    title: "Enterprise IAM Lifecycle Management with Okta and ServiceNow",
-    problem:
-      "Joiner–mover–leaver events across multiple connected systems create provisioning gaps, orphaned accounts, and slow fulfillment when handled manually.",
-    built:
-      "Operated and improved lifecycle processes across Okta, Active Directory, and downstream applications, with ServiceNow as the fulfillment and audit-trail layer — resolving synchronization failures and downstream provisioning breaks through service tasks.",
-    tools: ["Okta", "Active Directory", "ServiceNow", "Lifecycle Management", "Provisioning"],
-    outcome:
-      "Consistent, auditable access fulfillment at high ticket volume with strong SLA adherence — and a practical understanding of exactly where lifecycle automation breaks in production.",
-    caseStudyUrl: "#", // EDIT: link the case study when published
+    caseStudyUrl: "", // write-up not published yet — link stays hidden until set
   },
   {
     title: "Keycloak and Microsoft Entra ID SSO Integration Lab",
@@ -254,35 +272,13 @@ export const projects: Project[] = [
     tools: ["Keycloak", "Microsoft Entra ID", "OIDC", "SAML", "Federation"],
     outcome:
       "A working reference setup with documented pitfalls for identity-provider brokering — reusable for future integration work and demos.",
-    caseStudyUrl: "#", // EDIT: link the case study when published
-  },
-  {
-    title: "Access Review and RBAC Governance Case Study",
-    problem:
-      "Role structures drift over time: role explosion, over-provisioned users, and review campaigns that certify access nobody actually understands.",
-    built:
-      "Analyzed a role model against least-privilege and segregation-of-duties principles, then designed an access review campaign structure — reviewer selection, scoping, and decision support — aimed at reducing rubber-stamping.",
-    tools: ["RBAC", "Access Reviews", "Segregation of Duties", "Least Privilege", "IGA"],
-    outcome:
-      "A concrete governance playbook: how to scope review campaigns, what data reviewers actually need, and which role-hygiene signals predict risky entitlements.",
-    caseStudyUrl: "#", // EDIT: link the case study when published
-  },
-  {
-    title: "AI Agents and Identity Governance Research Prototype",
-    problem:
-      "AI agents act with real credentials and real permissions, but most identity programs cannot even inventory them — let alone certify, scope, or de-provision their access.",
-    built:
-      "Prototyped a browser-based scanner that inspects MidPoint and Keycloak configurations to surface risky agent and service identities: stale credentials, excessive privileges, and missing ownership.",
-    tools: ["Next.js", "TypeScript", "MidPoint", "Keycloak", "Non-Human Identity"],
-    outcome:
-      "A working v0.1 prototype and a sharper thesis question: what does lifecycle governance look like when the identity is an autonomous agent?",
-    caseStudyUrl: "#", // EDIT: link the case study / repo when published
+    caseStudyUrl: "", // write-up not published yet — link stays hidden until set
   },
 ];
 
 /* -----------------------------------------------------------------------------
  * CERTIFICATIONS
- * credentialUrl: "" renders as a placeholder — EDIT to add verify links.
+ * credentialUrl "" hides the verify link for that card.
  * ---------------------------------------------------------------------------*/
 export const certifications: Certification[] = [
   {
@@ -297,17 +293,17 @@ export const certifications: Certification[] = [
     code: "SC-300",
     name: "Microsoft Certified: Identity and Access Administrator Associate",
     issuer: "Microsoft",
-    period: "2025 — 2027", // EDIT: confirm dates
+    period: "2025 — 2027",
     credentialUrl:
-      "https://learn.microsoft.com/api/credentials/share/en-us/JoemonJohnson-5555/FFB8237328F76F3F?sharingId=31675020DAB84AC5", // EDIT: confirm link
+      "https://learn.microsoft.com/api/credentials/share/en-us/JoemonJohnson-5555/FFB8237328F76F3F?sharingId=31675020DAB84AC5",
   },
   {
     code: "SC-900",
     name: "Microsoft Certified: Security, Compliance, and Identity Fundamentals",
     issuer: "Microsoft",
-    period: "2024", // EDIT: confirm date
+    period: "2024",
     credentialUrl:
-      "https://learn.microsoft.com/api/credentials/share/en-us/JoemonJohnson-5555/399E8E012EAEF47A", // EDIT: confirm link
+      "https://learn.microsoft.com/api/credentials/share/en-us/JoemonJohnson-5555/399E8E012EAEF47A",
   },
   {
     code: "AZ-104",
@@ -321,7 +317,7 @@ export const certifications: Certification[] = [
     code: "OKTA",
     name: "Okta Certified Professional",
     issuer: "Okta",
-    period: "2025 — 2027", // EDIT: confirm dates
+    period: "2025 — 2027",
     credentialUrl:
       "https://www.credly.com/badges/83e49431-70e6-4fef-93c8-4b6d7c7d12a2/public_url",
   },
@@ -346,8 +342,8 @@ export const recruiterSnapshot = [
 export const research = {
   title: "Research Focus: Non-Human Identity Governance",
   paragraphs: [
-    "Most identity programs are built for people. Yet non-human identities — service accounts, API keys, workload identities, and increasingly AI agents — now outnumber human users by more than 40 to 1 in a typical enterprise, hold standing privileged access, and rarely have a clear owner. Most organizations cannot even reliably revoke an AI agent's credentials.",
-    "My research focuses on bringing identity governance discipline to this population: inventorying non-human identities, assigning ownership, scoring risk, and designing access certification processes that scale. It sits at the intersection of identity governance and administration (IGA), Zero Trust architecture, and Europe's tightening regulatory baseline (NIS2, DORA) — where access governance is no longer optional — plus the emerging question of how autonomous AI agents should be authenticated, authorized, and audited.",
+    "Most identity programs are built for people. Yet non-human identities — service accounts, API keys, workload identities, and increasingly AI agents — typically far outnumber human users in an enterprise, hold standing privileged access, and often have no clear owner or offboarding process.",
+    "My research focuses on bringing identity governance discipline to this population: inventorying non-human identities, assigning ownership, scoring risk, and designing access certification processes that scale. It sits at the intersection of identity governance and administration (IGA), Zero Trust architecture, and the growing regulatory attention on access governance in Europe (NIS2, DORA) — plus the emerging question of how autonomous AI agents should be authenticated, authorized, and audited.",
   ],
   areas: [
     {
@@ -379,6 +375,6 @@ export const research = {
  * ---------------------------------------------------------------------------*/
 export const contact = {
   blurb:
-    "Whether you're hiring for an identity team, supervising research on non-human identity governance, or want to compare notes on IAM — my inbox is open.",
+    "Whether you're hiring for an identity team, supervising research on non-human identity governance, or want to compare notes on IAM — get in touch.",
   cta: "Open to IAM, Identity Security, Cloud Identity, and Cybersecurity opportunities.",
 };
