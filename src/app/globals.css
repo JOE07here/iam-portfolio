@@ -41,13 +41,22 @@ html {
   scroll-behavior: smooth;
 }
 
-html[data-theme="purple"] {
-  --color-background: #0a0714;
-  --color-surface: #120d22;
-  --color-panel: #171130;
-  --color-edge: #2b2350;
-  --color-ink: #ece7f8;
-  --color-muted: #a49ac2;
+/* The page background never changes — only the accent colour and glows follow
+   the aurora as it moves between corners (html[data-accent] is advanced by
+   components/Aurora.tsx). Text and surfaces stay constant for readability. */
+html {
+  background-color: var(--color-background);
+}
+
+html[data-accent="green"] {
+  --color-accent: #34d399;
+  --color-accent-alt: #38bdf8;
+  --grid-line: rgba(52, 211, 153, 0.05);
+  --glow-a: rgba(52, 211, 153, 0.12);
+  --glow-b: rgba(56, 189, 248, 0.06);
+}
+
+html[data-accent="purple"] {
   --color-accent: #a78bfa;
   --color-accent-alt: #22d3ee;
   --grid-line: rgba(167, 139, 250, 0.05);
@@ -55,63 +64,103 @@ html[data-theme="purple"] {
   --glow-b: rgba(34, 211, 238, 0.06);
 }
 
-html[data-theme="green"] {
-  --color-background: #060907;
-  --color-surface: #0b110d;
-  --color-panel: #101812;
-  --color-edge: #1f2d23;
-  --color-ink: #e8f2ea;
-  --color-muted: #96a99b;
-  --color-accent: #4ade80;
-  --color-accent-alt: #22d3ee;
-  --grid-line: rgba(74, 222, 128, 0.05);
-  --glow-a: rgba(74, 222, 128, 0.1);
-  --glow-b: rgba(34, 211, 238, 0.06);
-}
-
-html[data-theme="silver"] {
-  --color-background: #f4f6f8;
-  --color-surface: #ffffff;
-  --color-panel: #e9edf2;
-  --color-edge: #d5dce4;
-  --color-ink: #101826;
-  --color-muted: #4e5d70;
-  --color-accent: #0369a1;
-  --color-accent-alt: #047857;
-  --grid-line: rgba(3, 105, 161, 0.08);
-  --glow-a: rgba(3, 105, 161, 0.07);
-  --glow-b: rgba(4, 120, 87, 0.05);
-  color-scheme: light;
-}
-
-html[data-theme="aurora"] {
-  --color-background: #050e14;
-  --color-surface: #0a1a20;
-  --color-panel: #0e242c;
-  --color-edge: #1b3a44;
-  --color-ink: #e6f4f4;
-  --color-muted: #8fb0b4;
-  --color-accent: #2dd4bf;
+html[data-accent="cyan"] {
+  --color-accent: #22d3ee;
   --color-accent-alt: #a78bfa;
-  --grid-line: rgba(45, 212, 191, 0.05);
-  --glow-a: rgba(45, 212, 191, 0.11);
-  --glow-b: rgba(167, 139, 250, 0.07);
+  --grid-line: rgba(34, 211, 238, 0.05);
+  --glow-a: rgba(34, 211, 238, 0.12);
+  --glow-b: rgba(167, 139, 250, 0.06);
 }
 
-/* Smooth cross-fade while a theme change is in flight. ThemeConductor adds
-   .theme-anim for ~1.2s around each switch, so this never fights the
+/* -----------------------------------------------------------------------------
+ * Aurora background — four soft corner lights that take turns expanding
+ * across the page: top-left blue → bottom-right green → top-right purple →
+ * bottom-left cyan (68s full cycle, 17s per corner; see Aurora.tsx).
+ * Pure opacity + transform animation on its own layer: no repaints, no blur
+ * filters, cheap on mobile. Sits behind all content and ignores the pointer.
+ * ---------------------------------------------------------------------------*/
+.aurora {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.aurora-blob {
+  position: absolute;
+  width: 90vmax;
+  height: 90vmax;
+  border-radius: 9999px;
+  opacity: 0;
+  transform: scale(0.75);
+  will-change: transform, opacity;
+  animation: aurora-phase 68s ease-in-out infinite;
+}
+.aurora-blob-blue {
+  top: -45vmax;
+  left: -45vmax;
+  background: radial-gradient(circle closest-side, rgba(56, 189, 248, 0.2), transparent 72%);
+  animation-delay: 0s;
+}
+.aurora-blob-green {
+  bottom: -45vmax;
+  right: -45vmax;
+  background: radial-gradient(circle closest-side, rgba(52, 211, 153, 0.18), transparent 72%);
+  animation-delay: 17s;
+}
+.aurora-blob-purple {
+  top: -45vmax;
+  right: -45vmax;
+  background: radial-gradient(circle closest-side, rgba(167, 139, 250, 0.18), transparent 72%);
+  animation-delay: 34s;
+}
+.aurora-blob-cyan {
+  bottom: -45vmax;
+  left: -45vmax;
+  background: radial-gradient(circle closest-side, rgba(34, 211, 238, 0.16), transparent 72%);
+  animation-delay: 51s;
+}
+@keyframes aurora-phase {
+  0% {
+    opacity: 0;
+    transform: scale(0.75);
+  }
+  8% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 1;
+    transform: scale(1.25);
+  }
+  33% {
+    opacity: 0;
+    transform: scale(1.35);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.75);
+  }
+}
+
+/* Aurora.tsx sets page-hidden while the tab is in the background */
+html.page-hidden .aurora-blob {
+  animation-play-state: paused;
+}
+
+/* Slow colour cross-fade while an accent change is in flight. Aurora.tsx adds
+   .theme-anim for ~4.5s around each switch, so this never fights the
    scroll-reveal transitions outside that window (.reveal is excluded). */
 html.theme-anim body,
 html.theme-anim *:not(.reveal),
 html.theme-anim *:not(.reveal)::before,
 html.theme-anim *:not(.reveal)::after {
   transition:
-    background-color 1s ease,
-    border-color 1s ease,
-    color 1s ease,
-    fill 1s ease,
-    stroke 1s ease,
-    box-shadow 1s ease;
+    background-color 4s ease,
+    border-color 4s ease,
+    color 4s ease,
+    fill 4s ease,
+    stroke 4s ease,
+    box-shadow 4s ease;
 }
 
 ::selection {
@@ -259,5 +308,14 @@ html.js .reveal:not(.reveal-visible) {
   .btn .btn-arrow,
   .nav-link::after {
     transition: none;
+  }
+  /* Static dark background with one subtle glow instead of the moving aurora */
+  .aurora-blob {
+    animation: none;
+    opacity: 0;
+    transform: none;
+  }
+  .aurora-blob-blue {
+    opacity: 0.5;
   }
 }

@@ -1,26 +1,45 @@
-import { contact, site } from "@/data/portfolio";
+import { availabilityInfo, contact, site } from "@/data/portfolio";
 import Section from "./Section";
 import Reveal from "./Reveal";
 import CopyEmail from "./CopyEmail";
 
 export default function Contact() {
+  // Only rows explicitly filled in portfolio.ts are shown
+  const availability = availabilityInfo.filter((row) => row.value);
+
   return (
-    <Section id="contact" eyebrow="07 · Contact" title="Get in touch." description={contact.blurb}>
+    <Section id="contact" eyebrow="08 · Contact" title="Get in touch." description={contact.blurb}>
       <Reveal>
         <div className="rounded-2xl border border-edge bg-surface p-8 text-center sm:p-12">
           <p className="mx-auto max-w-2xl text-xl font-semibold leading-snug text-ink sm:text-2xl">
             {contact.cta}
           </p>
 
+          {availability.length > 0 ? (
+            <dl className="mx-auto mt-6 max-w-xl space-y-1.5 text-sm">
+              {availability.map((row) => (
+                <div key={row.label} className="flex flex-wrap justify-center gap-x-2">
+                  <dt className="text-muted">{row.label}:</dt>
+                  <dd className="text-ink">{row.value}</dd>
+                </div>
+              ))}
+            </dl>
+          ) : null}
+
           <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <a href={`mailto:${site.email}`} className="btn btn-primary">
-              Email Me
-              <span className="btn-arrow" aria-hidden="true">
-                →
-              </span>
-            </a>
-            {/* mailto: does nothing on machines without a mail app — copy is the fallback */}
-            <CopyEmail email={site.email} />
+            {/* Email UI only exists once PROFESSIONAL_EMAIL is set in portfolio.ts */}
+            {site.email ? (
+              <>
+                <a href={`mailto:${site.email}`} className="btn btn-primary">
+                  Email Me
+                  <span className="btn-arrow" aria-hidden="true">
+                    →
+                  </span>
+                </a>
+                {/* mailto: does nothing on machines without a mail app — copy is the fallback */}
+                <CopyEmail email={site.email} />
+              </>
+            ) : null}
             <a href={site.linkedin} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
               LinkedIn{" "}
               <span className="btn-arrow" aria-hidden="true">
@@ -36,7 +55,8 @@ export default function Contact() {
           </div>
 
           <p className="mt-8 font-mono text-sm text-muted">
-            Based in {site.location} · {site.email}
+            Based in {site.location}
+            {site.email ? ` · ${site.email}` : ""}
           </p>
         </div>
       </Reveal>

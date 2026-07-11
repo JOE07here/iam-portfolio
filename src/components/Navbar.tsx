@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { site } from "@/data/portfolio";
-import PaletteToggle from "./PaletteToggle";
 
 const NAV_LINKS = [
   { href: "#about", label: "About" },
@@ -10,6 +9,7 @@ const NAV_LINKS = [
   { href: "#experience", label: "Experience" },
   { href: "#projects", label: "Projects" },
   { href: "#certifications", label: "Certifications" },
+  { href: "#education", label: "Education" },
   { href: "#research", label: "Research" },
   { href: "#contact", label: "Contact" },
 ];
@@ -36,8 +36,6 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
-
-          <PaletteToggle />
 
           {/* Mobile menu toggle */}
           <button

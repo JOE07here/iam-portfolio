@@ -2,27 +2,24 @@ import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { site } from "@/data/portfolio";
-import ThemeConductor from "@/components/ThemeConductor";
+import Aurora from "@/components/Aurora";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains-mono" });
 
-const seoTitle = `${site.name} | IAM Engineer in Germany | Okta, MidPoint, Entra ID`;
-const seoDescription =
-  "IAM Engineer in Germany focused on identity governance and cloud identity — Okta, MidPoint, Keycloak, Microsoft Entra ID, ServiceNow, SSO, MFA, RBAC, access reviews, and identity lifecycle management.";
+const description =
+  "IAM engineer in Germany with 2.8+ years of enterprise identity experience across Okta, MidPoint, Keycloak, Microsoft Entra ID, and ServiceNow — focused on identity governance, federation, and non-human identity security.";
 
-// SEO metadata — pulled from src/data/portfolio.ts (edit `site` there).
+// SEO metadata — personal details come from src/data/portfolio.ts.
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: seoTitle,
-  description: seoDescription,
-  alternates: { canonical: site.url },
+  title: `${site.name} — IAM Engineer & Identity Security`,
+  description,
   keywords: [
     "Identity and Access Management",
     "IAM Engineer",
     "Identity Governance",
-    "Cloud Identity",
-    "Cybersecurity",
+    "IGA",
     "Okta",
     "MidPoint",
     "Keycloak",
@@ -30,32 +27,29 @@ export const metadata: Metadata = {
     "ServiceNow",
     "SSO",
     "MFA",
-    "RBAC",
-    "SCIM",
     "Access Reviews",
     "Identity Lifecycle Management",
-    "Zero Trust",
     "Non-Human Identities",
-    "Identity Governance and Administration",
-    "IGA",
-    "NIS2",
-    "DORA",
-    "Machine Identities",
     "Germany",
   ],
   authors: [{ name: site.name }],
+  alternates: { canonical: `${site.url}/` },
   openGraph: {
-    title: seoTitle,
-    description: seoDescription,
-    url: site.url,
+    title: `${site.name} — IAM Engineer & Identity Security`,
+    description,
+    url: `${site.url}/`,
     siteName: site.name,
-    type: "website",
-    locale: "en_US",
+    type: "profile",
+    locale: "en_GB",
+    // Static 1200x630 card in public/og.png (regenerate by tweaking colors/text
+    // in a design tool or ask Claude to re-render it)
+    images: [{ url: `${site.url}/og.png`, width: 1200, height: 630, alt: `${site.name} — IAM Engineer & Identity Security` }],
   },
   twitter: {
-    card: "summary",
-    title: seoTitle,
-    description: seoDescription,
+    card: "summary_large_image",
+    title: `${site.name} — IAM Engineer & Identity Security`,
+    description,
+    images: [`${site.url}/og.png`],
   },
   robots: { index: true, follow: true },
 };
@@ -64,34 +58,37 @@ export const viewport: Viewport = {
   themeColor: "#060b16",
 };
 
-// Structured data so search engines understand who this site is about.
-const personJsonLd = {
+// ProfilePage structured data with Person as the main entity (schema.org)
+const structuredData = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: site.name,
-  jobTitle: "IAM Engineer",
-  description: seoDescription,
-  url: site.url,
-  address: { "@type": "PostalAddress", addressCountry: "DE" },
-  sameAs: [site.linkedin, site.github],
-  knowsAbout: [
-    "Identity & Access Management",
-    "Identity Governance",
-    "Cloud Identity",
-    "Zero Trust",
-    "Okta",
-    "MidPoint",
-    "Keycloak",
-    "Microsoft Entra ID",
-    "ServiceNow",
-    "SSO",
-    "MFA",
-    "RBAC",
-    "SCIM",
-    "Access Reviews",
-    "Identity Lifecycle Management",
-    "Non-Human Identity Governance",
-  ],
+  "@type": "ProfilePage",
+  mainEntity: {
+    "@type": "Person",
+    name: site.name,
+    jobTitle: "IAM Engineer",
+    description,
+    url: `${site.url}/`,
+    address: { "@type": "PostalAddress", addressCountry: "DE" },
+    sameAs: [site.linkedin, site.github],
+    knowsAbout: [
+      "Identity and Access Management",
+      "Identity Governance and Administration",
+      "Cloud Identity",
+      "Zero Trust",
+      "Okta",
+      "MidPoint",
+      "Keycloak",
+      "Microsoft Entra ID",
+      "ServiceNow",
+      "SAML",
+      "OpenID Connect",
+      "SCIM",
+      "Multi-Factor Authentication",
+      "Access Reviews",
+      "Identity Lifecycle Management",
+      "Non-Human Identity Governance",
+    ],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -99,26 +96,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     // suppressHydrationWarning: the inline script in <body> adds the `js` class
     // before React hydrates — an intentional server/client difference
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${inter.variable} ${jetbrainsMono.variable} bg-background font-sans text-ink antialiased`}
-      >
-        {/* Runs before first paint: marks JS as available (scroll-reveal hiding
-            is gated on it) and restores a pinned palette without a flash.
-            'navy'/'green' are legacy stored values from the old toggle system. */}
+      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans text-ink antialiased`}>
+        {/* Runs before first paint: marks JS as available (scroll-reveal
+            hiding is gated on it) */}
         <script
           dangerouslySetInnerHTML={{
-            __html:
-              "document.documentElement.classList.add('js');try{var p=localStorage.getItem('palette');if(p==='navy')p='blue';if(p&&p!=='auto')document.documentElement.dataset.theme=p}catch(e){}",
+            __html: "document.documentElement.classList.add('js')",
           }}
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
         <a href="#main" className="skip-link">
           Skip to content
         </a>
-        <ThemeConductor />
+        <Aurora />
         {children}
       </body>
     </html>

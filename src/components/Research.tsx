@@ -4,7 +4,7 @@ import Reveal from "./Reveal";
 
 export default function Research() {
   return (
-    <Section id="research" eyebrow="06 · Research" title={research.title}>
+    <Section id="research" eyebrow="07 · Research" title={research.title}>
       <Reveal className="max-w-3xl space-y-5">
         {research.paragraphs.map((paragraph, i) => (
           <p key={i} className="leading-relaxed text-muted">
