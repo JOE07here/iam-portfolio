@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { site } from "@/data/portfolio";
+import ThemeModeToggle from "./ThemeModeToggle";
 
 const NAV_LINKS = [
   { href: "#about", label: "About" },
@@ -36,6 +37,8 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
+
+          <ThemeModeToggle />
 
           {/* Mobile menu toggle */}
           <button

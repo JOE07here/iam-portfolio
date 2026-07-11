@@ -73,6 +73,70 @@ html[data-accent="cyan"] {
 }
 
 /* -----------------------------------------------------------------------------
+ * Light mode — activated by the `light` class on <html>. The Dark/System/Light
+ * toggle (components/ThemeModeToggle.tsx) resolves the visitor's choice; the
+ * inline script in layout.tsx applies it before first paint. The aurora keeps
+ * cycling; accents get darker variants to preserve WCAG contrast on light.
+ * ---------------------------------------------------------------------------*/
+html.light {
+  --color-background: #f4f6f8;
+  --color-surface: #ffffff;
+  --color-panel: #e9edf2;
+  --color-edge: #d5dce4;
+  --color-ink: #101826;
+  --color-muted: #4e5d70;
+  --color-accent: #0369a1;
+  --color-accent-alt: #047857;
+  --grid-line: rgba(3, 105, 161, 0.07);
+  --glow-a: rgba(3, 105, 161, 0.08);
+  --glow-b: rgba(4, 120, 87, 0.05);
+  color-scheme: light;
+}
+html.light[data-accent="green"] {
+  --color-accent: #047857;
+  --color-accent-alt: #0369a1;
+  --grid-line: rgba(4, 120, 87, 0.07);
+  --glow-a: rgba(4, 120, 87, 0.08);
+  --glow-b: rgba(3, 105, 161, 0.05);
+}
+html.light[data-accent="purple"] {
+  --color-accent: #7c3aed;
+  --color-accent-alt: #0e7490;
+  --grid-line: rgba(124, 58, 237, 0.07);
+  --glow-a: rgba(124, 58, 237, 0.08);
+  --glow-b: rgba(14, 116, 144, 0.05);
+}
+html.light[data-accent="cyan"] {
+  --color-accent: #0e7490;
+  --color-accent-alt: #7c3aed;
+  --grid-line: rgba(14, 116, 144, 0.07);
+  --glow-a: rgba(14, 116, 144, 0.08);
+  --glow-b: rgba(124, 58, 237, 0.05);
+}
+
+/* Soften the aurora on light backgrounds */
+html.light .aurora {
+  opacity: 0.55;
+}
+
+/* Dark/System/Light toggle icons — CSS picks the icon from html[data-mode],
+   which the pre-paint script sets, so the button needs no client state and
+   can't mismatch during hydration. */
+.mode-icon {
+  display: none;
+}
+html[data-mode="dark"] .mode-icon-dark,
+html:not([data-mode]) .mode-icon-dark {
+  display: block;
+}
+html[data-mode="system"] .mode-icon-system {
+  display: block;
+}
+html[data-mode="light"] .mode-icon-light {
+  display: block;
+}
+
+/* -----------------------------------------------------------------------------
  * Aurora background — four soft corner lights that take turns expanding
  * across the page: top-left blue → bottom-right green → top-right purple →
  * bottom-left cyan (68s full cycle, 17s per corner; see Aurora.tsx).

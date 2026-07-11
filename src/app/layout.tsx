@@ -98,10 +98,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans text-ink antialiased`}>
         {/* Runs before first paint: marks JS as available (scroll-reveal
-            hiding is gated on it) */}
+            hiding is gated on it) and resolves the saved Dark/System/Light
+            choice without a flash of the wrong theme */}
         <script
           dangerouslySetInnerHTML={{
-            __html: "document.documentElement.classList.add('js')",
+            __html:
+              "document.documentElement.classList.add('js');try{var m=localStorage.getItem('mode');if(m!=='light'&&m!=='system')m='dark';document.documentElement.dataset.mode=m;if(m==='light'||(m==='system'&&matchMedia('(prefers-color-scheme: light)').matches))document.documentElement.classList.add('light')}catch(e){}",
           }}
         />
         <script
