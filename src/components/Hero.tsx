@@ -1,9 +1,15 @@
+"use client";
+
 import { hero, site } from "@/data/portfolio";
+import { heroDe } from "@/data/portfolio.de";
+import { useLanguage } from "./LanguageProvider";
 import Badge from "./Badge";
 import Reveal from "./Reveal";
 import Typewriter from "./Typewriter";
 
 export default function Hero() {
+  const { language } = useLanguage();
+  const content = language === "de" ? heroDe : hero;
   return (
     <section id="top" className="relative overflow-hidden">
       {/* Decorative backdrop */}
@@ -17,7 +23,7 @@ export default function Hero() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-alt opacity-60" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-alt" />
             </span>
-            {hero.availability}
+            {content.availability}
           </p>
 
           <h1 className="mt-6 text-5xl font-bold tracking-tight text-ink sm:text-6xl lg:text-7xl">
@@ -26,7 +32,7 @@ export default function Hero() {
 
           {/* Static lead line — the professional identity, always readable */}
           <p className="mt-5 max-w-4xl text-xl font-semibold leading-snug text-ink/90 sm:text-2xl">
-            {hero.roleLine}
+            {content.roleLine}
           </p>
 
           {/* Subtle terminal-style typewriter cycling through focus areas */}
@@ -34,14 +40,14 @@ export default function Hero() {
             <span className="text-accent" aria-hidden="true">
               ~${" "}
             </span>
-            <Typewriter phrases={hero.taglines} />
+            <Typewriter phrases={content.taglines} />
           </p>
 
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">{hero.subheadline}</p>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">{content.subheadline}</p>
 
           <div className="mt-9 flex flex-wrap gap-4">
             <a href="#projects" className="btn btn-primary">
-              View Projects
+              {language === "de" ? "Projekte ansehen" : "View Projects"}
               <span className="btn-arrow" aria-hidden="true">
                 →
               </span>
@@ -49,11 +55,11 @@ export default function Hero() {
             {/* Appears automatically once site.cvUrl is set in portfolio.ts */}
             {site.cvUrl ? (
               <a href={site.cvUrl} className="btn btn-secondary" download>
-                Download CV
+                {language === "de" ? "Lebenslauf herunterladen" : "Download CV"}
               </a>
             ) : null}
             <a href="#contact" className="btn btn-ghost">
-              Contact Me
+              {language === "de" ? "Kontakt" : "Contact Me"}
               <span className="btn-arrow" aria-hidden="true">
                 →
               </span>
@@ -61,7 +67,7 @@ export default function Hero() {
           </div>
 
           <ul className="mt-12 flex flex-wrap gap-2" aria-label="Key platforms and certifications">
-            {hero.badges.map((badge) => (
+            {content.badges.map((badge) => (
               <li key={badge}>
                 <Badge>{badge}</Badge>
               </li>

@@ -1,18 +1,24 @@
+"use client";
+
 import { experience } from "@/data/portfolio";
+import { experienceDe } from "@/data/portfolio.de";
+import { useLanguage } from "./LanguageProvider";
 import Section from "./Section";
 import Reveal from "./Reveal";
 import Badge from "./Badge";
 
 export default function Experience() {
+  const { language } = useLanguage();
+  const content = language === "de" ? experienceDe : experience;
   return (
     <Section
       id="experience"
-      eyebrow="03 · Experience"
-      title="Where I've done the work."
-      description="Enterprise IAM operations and engineering — described without client-confidential detail."
+      eyebrow={language === "de" ? "03 · Erfahrung" : "03 · Experience"}
+      title={language === "de" ? "Wo ich praktische Erfahrung gesammelt habe." : "Where I've done the work."}
+      description={language === "de" ? "Enterprise-IAM-Betrieb und Engineering — ohne vertrauliche Kundendetails." : "Enterprise IAM operations and engineering — described without client-confidential detail."}
     >
       <ol className="relative space-y-10 border-l border-edge pl-8">
-        {experience.map((item, i) => (
+        {content.map((item, i) => (
           <li key={item.role} className="relative">
             {/* Timeline dot */}
             <span

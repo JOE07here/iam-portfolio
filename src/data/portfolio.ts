@@ -49,7 +49,7 @@ export type Certification = {
  * drop mail from senders Apple hasn't approved, so recruiters may not reach
  * you.
  * ---------------------------------------------------------------------------*/
-export const PROFESSIONAL_EMAIL = ""; // EDIT: e.g. "joemon.johnson@example.com"
+export const PROFESSIONAL_EMAIL = "joemonjohnsonme@gmail.com";
 
 /* -----------------------------------------------------------------------------
  * SITE / IDENTITY — name, links, CV, deployed URL
@@ -87,7 +87,7 @@ export const hero = {
     "Non-Human Identity Security",
   ],
   subheadline:
-    "2.8+ years of enterprise IAM experience across Okta, MidPoint, Microsoft Entra ID, Keycloak, and ServiceNow — currently working as an Identity Management working student in Germany while completing an M.Sc. in Computer Science with a focus on Cyber Security.",
+    "3+ years of enterprise IAM experience across Okta, MidPoint, Microsoft Entra ID, Keycloak, and ServiceNow — currently working as an Identity Management working student in Germany while completing an M.Sc. in Computer Science with a focus on Cyber Security.",
   badges: ["Okta", "MidPoint", "Keycloak", "Entra ID", "ServiceNow", "SC-100", "SC-300"],
 };
 
@@ -120,8 +120,8 @@ export const education = {
 };
 
 export const languages = [
-  { name: "English", level: "B2 · IELTS 6.5" },
-  { name: "German", level: "A1 · currently working toward B1" },
+  { name: "English", level: "Professional proficiency" },
+  { name: "Deutsch", level: "Basic proficiency · actively developing" },
 ];
 
 /* -----------------------------------------------------------------------------
@@ -242,7 +242,7 @@ export const experience: ExperienceItem[] = [
  * ---------------------------------------------------------------------------*/
 export const projects: Project[] = [
   {
-    title: "CyberLens — Non-Human Identity Scanner (formerly AgentLens)",
+    title: "CyberLens — Non-Human Identity Scanner",
     problem:
       "AI agents and service accounts act with real credentials and real permissions, but most identity programs cannot easily inventory them — let alone certify, scope, or de-provision their access.",
     built:
@@ -328,7 +328,7 @@ export const certifications: Certification[] = [
  * the hero. All backed by the experience/certifications sections.
  * ---------------------------------------------------------------------------*/
 export const recruiterSnapshot = [
-  "2.8+ years IAM experience (Capgemini + working student)",
+  "3+ years IAM experience (Capgemini + working student)",
   "Germany-based · M.Sc. Cyber Security student",
   "Working Student — Identity Management",
   "Okta · MidPoint · Keycloak · Entra ID · ServiceNow",

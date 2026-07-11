@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useLanguage } from "./LanguageProvider";
 
 /**
  * Copies the email address to the clipboard — the reliable fallback for
@@ -8,6 +9,7 @@ import { useState } from "react";
  */
 export default function CopyEmail({ email }: { email: string }) {
   const [copied, setCopied] = useState(false);
+  const { language } = useLanguage();
 
   const copy = async () => {
     try {
@@ -21,7 +23,7 @@ export default function CopyEmail({ email }: { email: string }) {
 
   return (
     <button type="button" onClick={copy} className="btn btn-ghost" aria-live="polite">
-      {copied ? "Copied ✓" : "Copy Email"}
+      {copied ? (language === "de" ? "Kopiert ✓" : "Copied ✓") : (language === "de" ? "E-Mail kopieren" : "Copy Email")}
     </button>
   );
 }

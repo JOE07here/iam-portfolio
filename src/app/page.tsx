@@ -10,10 +10,11 @@ import EducationLanguages from "@/components/EducationLanguages";
 import Research from "@/components/Research";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import { LanguageProvider } from "@/components/LanguageProvider";
 
 export default function Home() {
   return (
-    <>
+    <LanguageProvider>
       <Navbar />
       <main id="main">
         <Hero />
@@ -28,6 +29,6 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
-    </>
+    </LanguageProvider>
   );
 }
