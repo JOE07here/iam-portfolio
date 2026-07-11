@@ -1,18 +1,24 @@
+"use client";
+
 import { availabilityInfo, contact, site } from "@/data/portfolio";
+import { availabilityInfoDe, contactDe } from "@/data/portfolio.de";
+import { useLanguage } from "./LanguageProvider";
 import Section from "./Section";
 import Reveal from "./Reveal";
 import CopyEmail from "./CopyEmail";
 
 export default function Contact() {
+  const { language } = useLanguage();
+  const content = language === "de" ? contactDe : contact;
   // Only rows explicitly filled in portfolio.ts are shown
-  const availability = availabilityInfo.filter((row) => row.value);
+  const availability = (language === "de" ? availabilityInfoDe : availabilityInfo).filter((row) => row.value);
 
   return (
-    <Section id="contact" eyebrow="08 · Contact" title="Get in touch." description={contact.blurb}>
+    <Section id="contact" eyebrow={language === "de" ? "08 · Kontakt" : "08 · Contact"} title={language === "de" ? "Kontakt aufnehmen." : "Get in touch."} description={content.blurb}>
       <Reveal>
         <div className="rounded-2xl border border-edge bg-surface p-8 text-center sm:p-12">
           <p className="mx-auto max-w-2xl text-xl font-semibold leading-snug text-ink sm:text-2xl">
-            {contact.cta}
+            {content.cta}
           </p>
 
           {availability.length > 0 ? (
@@ -31,7 +37,7 @@ export default function Contact() {
             {site.email ? (
               <>
                 <a href={`mailto:${site.email}`} className="btn btn-primary">
-                  Email Me
+                  {language === "de" ? "E-Mail senden" : "Email Me"}
                   <span className="btn-arrow" aria-hidden="true">
                     →
                   </span>
@@ -55,7 +61,7 @@ export default function Contact() {
           </div>
 
           <p className="mt-8 font-mono text-sm text-muted">
-            Based in {site.location}
+            {language === "de" ? "Standort: Deutschland" : `Based in ${site.location}`}
             {site.email ? ` · ${site.email}` : ""}
           </p>
         </div>
